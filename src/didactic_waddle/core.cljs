@@ -3,34 +3,37 @@
             [quil.middleware :as m]))
 
 (defn setup []
-  ; Set frame rate to 30 frames per second.
-  (q/frame-rate 30)
+  (q/frame-rate 60)
   ; Set color mode to HSB (HSV) instead of default RGB.
   (q/color-mode :hsb)
-  ; setup function returns initial state. It contains
-  ; circle color and position.
-  {:color 0
-   :angle 0})
+  {:color 0,
+   :size  1,
+   :growing true,
+   :angle 0
+   })
 
-(defn update-state [state]
-  ; Update sketch state by changing circle color and position.
-  {:color (mod (+ (:color state) 0.7) 255)
-   :angle (+ (:angle state) 0.1)})
+(defn update-state [s]
+  (let [size (:size s)
+        growing (:growing s)]
+    {:color (mod (+ (:color s) 0.7) 255),
+     :angle (mod (+ (:angle s) 0.02) (* 2 Math/PI)),
+     :size (+ size
+              (if growing 0.01 -0.01)),
+     :growing (if growing
+                (if (< 1.5 size) false true)
+                (if (< size 0.5) true false))}))
 
 (defn draw-state [state]
   ; Clear the sketch by filling it with light-grey color.
   (q/background 240)
   ; Set circle color.
-  (q/fill (:color state) 255 255)
-  ; Calculate x and y coordinates of the circle.
-  (let [angle (:angle state)
-        x (* 150 (q/cos angle))
-        y (* 150 (q/sin angle))]
-    ; Move origin point to the center of the sketch.
-    (q/with-translation [(/ (q/width) 2)
-                         (/ (q/height) 2)]
-      ; Draw the circle.
-      (q/ellipse x y 100 100))))
+  (q/stroke (:color state) 255 255)
+  (let [size (* 200 (:size state))
+        centre (/ (q/width) 2)]
+    (q/rect-mode :center)
+    (q/with-translation [centre centre]
+      (q/with-rotation [(:angle state)]
+        (q/rect 0 0 size size)))))
 
 (q/defsketch didactic-waddle
   :host "didactic-waddle"
