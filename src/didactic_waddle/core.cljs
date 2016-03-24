@@ -13,12 +13,12 @@
   (let [size (:size box)
         growing (:growing box)]
     (assoc box
-           :color (mod (+ (:color box) 0.7) 255),
+           :color (mod (+ (:color box) 0.4) 255),
            :angle (mod (+ (:angle box) 0.02) (* 2 Math/PI)),
            :size (+ size
                     (if growing 0.01 -0.01)),
            :growing (if growing
-                      (if (< 1.5 size) false true)
+                      (if (< 1.8 size) false true)
                       (if (< size 0.5) true false)))))
 
 (defn update-state [s] {:boxes (map next-stage (:boxes s))})
@@ -31,12 +31,12 @@
   {:boxes (map
             (fn [n]
               (nth (iterate next-stage
-                            (make-box (* 30 (mod n 5))
-                                      (* 30 (quot n 5))
+                            (make-box (* 30 (mod n 18))
+                                      (* 30 (quot n 18))
                                       20))
                    n))
 
-            (range 25))})
+            (range 324))})
 
 (defn draw-box [box]
   (q/stroke (:color box) 255 255)
