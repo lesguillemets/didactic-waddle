@@ -49,8 +49,7 @@
 (defn draw-state [state]
   ; Clear the sketch by filling it with light-grey color.
   (q/background 240)
-  ; Set circle color.
-  (map draw-box (:boxes state)))
+  (doseq [box (:boxes state)] (draw-box box)))
 
 (q/defsketch didactic-waddle
   :host "didactic-waddle"
