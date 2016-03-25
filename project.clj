@@ -15,6 +15,6 @@
              :compiler
              {:output-to "js/main.js"
               :output-dir "out"
-              :main "didactic_waddle.core"
+              :main "didactic_waddle.sketch01"
               :optimizations :none
               :pretty-print true}}]})
