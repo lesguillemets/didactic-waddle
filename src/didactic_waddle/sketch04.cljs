@@ -1,4 +1,4 @@
-(ns didactic-waddle.sketch03
+(ns didactic-waddle.sketch04
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]))
 
