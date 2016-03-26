@@ -5,32 +5,43 @@
 (def size 500)
 (def TwoPI (* Math/PI 2))
 
+(defn gen-circle [n]
+  (let [seed (q/random 0 2048)]
+    {:x (* 20 n) :y (* 20 (- n)) :r 40 :step 0
+     :noiser (fn [& x] (do
+                       (q/noise-seed seed)
+                       (apply q/noise x)))})) 
+
 (defn setup []
+  (q/background 0)
   (q/frame-rate 30)
   (q/color-mode :hsb)
   ; (q/no-loop)
-  {:x 20 :y 20 :r 40 :step 0})
+  (map gen-circle (range -15 15)))
 
 (defn draw-circle [circ]
   (q/no-stroke)
   (let [x (:x circ)
         y (:y circ)
-        radius (* (q/noise (/ (:step circ) 30)) (:r circ))]
+        radius (* ((:noiser circ) (/ (:step circ) 30)) (:r circ))]
     (q/arc x y radius radius 0 TwoPI)))
 
-(defn update-state [{x :x y :y step :step :as c}]
+(defn update-circle [{x :x y :y step :step f :noiser :as c}]
   (assoc c
-         :x (+ (* (Math/sqrt (q/noise (/ step 30))) 2) x),
-         :y (+ (* (Math/sqrt (q/noise (/ step 30))) 2) y),
+         :x (+ (* (Math/sqrt (f (/ step 30))) 2) x),
+         :y (+ (* (Math/sqrt (f (/ step 30))) 2) y),
          :step (inc step)
          ))
 
-(defn draw-state [c]
+(defn update-state [s]
+  (map update-circle s))
+
+(defn draw-state [state]
   ; (q/background 0 20) "Transparency can't be used"
-  (q/fill 0 0 0 5)
+  (q/fill 0 0 0 3)
   (q/rect 0 0 size size)
   (q/fill 120 240 240)
-  (draw-circle c))
+  (doseq [c state] (draw-circle c)))
 
 (q/defsketch didactic-waddle
   :host "didactic-waddle"
