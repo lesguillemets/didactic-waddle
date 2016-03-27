@@ -18,7 +18,6 @@
               :asset-path "../outs/out00"
               :main "didactic_waddle.sketch00"
               :optimizations :none
-              :source-map false
               :pretty-print true}},
 
             {:source-paths ["src"]
@@ -28,7 +27,6 @@
               :asset-path "../outs/out01"
               :main "didactic_waddle.sketch01"
               :optimizations :none
-              :source-map false
               :pretty-print true}},
 
             {:source-paths ["src"]
@@ -38,7 +36,6 @@
               :asset-path "../outs/out02"
               :main "didactic_waddle.sketch02"
               :optimizations :none
-              :source-map false
               :pretty-print true}},
 
             {:source-paths ["src"]
@@ -48,7 +45,6 @@
               :output-dir "outs/out03"
               :main "didactic_waddle.sketch03"
               :optimizations :none
-              :source-map false
               :pretty-print true}},
 
             {:source-paths ["src"]
@@ -58,6 +54,5 @@
               :asset-path "../outs/out04"
               :main "didactic_waddle.sketch04"
               :optimizations :none
-              :source-map false
               :pretty-print true}},
             ]})
