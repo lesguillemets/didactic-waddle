@@ -1,4 +1,4 @@
-(ns didactic-waddle.core
+(ns didactic-waddle.sketch00
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]))
 (defn make-box [x y base-size]
