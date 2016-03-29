@@ -4,6 +4,8 @@
 
 (def width 100)
 (def height 100)
+(def expand 4)
+(def neighbour-width 1)
 (def hue 100)
 (def sat 200)
 (def max-b 200)
@@ -18,13 +20,16 @@
           (rand-int 2))))))
 
 (defn neighbouring [x y]
-  (for [dx (range -1 2)
-        dy (range -1 2)
+  (for [dx (range (- neighbour-width) (inc neighbour-width))
+        dy (range (- neighbour-width) (inc neighbour-width))
         :when (not (and (= dx 0) (= dy 0)))]
-    [(+ x dx) (+ y dy)]))
+    [dx dy]))
+
+(defn add-weight [v dx dy] v)
 
 (defn get-neighbours [field x y]
-  (map (fn [[x y]] (get-in field [y x] 0))
+  (map (fn [[dx dy]]
+         (add-weight (get-in field [(+ y dy) (+ x dx)] 0) dx dy))
        (neighbouring x y)))
 
 (defn check-spawn [v neighbours]
@@ -54,6 +59,7 @@
   (q/frame-rate 2)
   (q/background 0)
   (enable-console-print!)
+  (q/no-stroke)
   ; (q/no-loop)
   {:field (random-field width height)})
 
@@ -62,8 +68,8 @@
 
 (defn draw-dot-at [field x y]
   (let [color (to-color (get-in field [y x]))]
-    (apply q/stroke color) ; with-stroke doesn't work somehow
-    (q/point x y)
+    (apply q/fill color) ; with-stroke doesn't work somehow
+    (q/rect (* expand x) (* expand y) expand expand)
     ))
 
 (defn draw-state [s]
@@ -76,7 +82,7 @@
 
 (q/defsketch didactic-waddle
   :host "didactic-waddle"
-  :size [width height]
+  :size [(* expand width) (* expand height)]
   :setup setup
   :update update-state
   :draw draw-state
