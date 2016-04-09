@@ -64,4 +64,13 @@
               :main "didactic_waddle.sketch05"
               :optimizations :none
               :pretty-print true}},
+
+            {:source-paths ["src"]
+             :compiler
+             {:output-to "js/sketch06.js"
+              :output-dir "outs/out06"
+              :asset-path "../outs/out06"
+              :main "didactic_waddle.sketch06"
+              :optimizations :none
+              :pretty-print true}},
             ]})
