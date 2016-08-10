@@ -48,7 +48,7 @@
         (random-draw grid-size x-loc y-loc state)))))
 
 (q/defsketch didactic-waddle
-  :host "didactic-waddle"
+  :host "sketch04"
   :size [size size]
   :setup setup
   :update update-state

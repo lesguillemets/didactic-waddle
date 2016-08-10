@@ -65,7 +65,7 @@
 
 
 (q/defsketch didactic-waddle
-  :host "didactic-waddle"
+  :host "sketch06"
   :size [(* expand width) (* expand height)]
   :setup setup
   :update update-state

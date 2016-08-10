@@ -39,7 +39,7 @@
         (random-draw grid-size x-loc y-loc)))))
 
 (q/defsketch didactic-waddle
-  :host "didactic-waddle"
+  :host "sketch03"
   :size [size size]
   :setup setup
   :update update-state

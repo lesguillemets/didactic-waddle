@@ -44,7 +44,7 @@
   (doseq [c state] (draw-circle c)))
 
 (q/defsketch didactic-waddle
-  :host "didactic-waddle"
+  :host "sketch02"
   :size [size size]
   :setup setup
   :update update-state

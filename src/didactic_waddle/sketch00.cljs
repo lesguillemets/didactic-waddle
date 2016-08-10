@@ -52,7 +52,7 @@
   (doseq [box (:boxes state)] (draw-box box)))
 
 (q/defsketch didactic-waddle
-  :host "didactic-waddle"
+  :host "sketch00"
   :size [500 500]
   ; setup function called only once, during sketch initialization.
   :setup setup
